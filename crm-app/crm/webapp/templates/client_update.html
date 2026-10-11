@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container d-flex justify-content-center align-items-center py-5">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 600px;">
+        <div class="card-body">
+            <h3 class="text-center mb-4 font-weight-bold">Update Client</h3>
+            
+            <form method="POST">
+                 {% csrf_token %}
+
+                <div class="client-form-fields">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Go Back</a>
+                    <button type="submit" class="btn btn-primary btn-solid theme-primary">Update Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

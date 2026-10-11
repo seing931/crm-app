@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Product purchase</h1>
+<br>
+<p>
+    <a href="{% url 'new_product' client.id %}" class="btn-solid theme-primary">New Product</a>
+</p>
+<br>
+<div class="card">
+  <h5 class="card-header">{{ client.id }} . {{ client.full_name }}</h5>
+  <div class="card-body">
+    <h4 class="card-title">{{ client.email }}</h4>
+    <p class="card-text">
+        Phone : {{ client.phone }}<br>
+        Address : {{ client.address }}<br>
+        City : {{ client.city }}<br>
+        State : {{ client.state }}<br>
+        Zipcode : {{ client.zip_code }}<br>
+        Issued Date : {{ client.created_at }}<br>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Purchased Date</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.product_name }}</td>
+        <td>{{ product.date }}</td>
+        <td>{{ product.price  }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+    </p>
+   <div class="d-flex gap-2">
+    <a href="{% url 'home' %}" class="btn-solid theme-primary">Go Back</a>
+  </div>
+  </div>
+</div>
+{% endblock %}

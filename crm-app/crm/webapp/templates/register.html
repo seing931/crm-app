@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center py-5">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
+        <div class="card-body">
+            <h3 class="text-center mb-4 font-weight-bold">Create an Account</h3>
+
+            <form method="post" action="">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Please correct the errors below:</strong>
+                        <ul class="mb-0 mt-2">
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <!-- This styles the default Django form paragraphs nicely inside the card -->
+                <div class="register-form-fields">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary btn-solid theme-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

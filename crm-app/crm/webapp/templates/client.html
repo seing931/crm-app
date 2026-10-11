@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Client info</h1>
+<br>
+<div class="card">
+  <h5 class="card-header">{{ client_record.full_name }}</h5>
+  <div class="card-body">
+    <h4 class="card-title">{{ client_record.email }}</h4>
+    <p class="card-text">
+        Phone : {{ client_record.phone }}<br>
+        Address : {{ client_record.address }}<br>
+        City : {{ client_record.city }}<br>
+        State : {{ client_record.state }}<br>
+        Zipcode : {{ client_record.zip_code }}<br>
+        Created at : {{ client_record.created_at }}<br>
+    </p>
+   <div class="d-flex gap-2">
+    <a href="{% url 'client_delete' client_record.id %}" class="btn-solid theme-danger">Delete</a>
+    <a href="{% url 'client_update' client_record.id %}" class="btn-solid theme-primary">Update</a>
+    <a href="{% url 'home' %}" class="btn-solid theme-primary">Go Back</a>
+  </div>
+  </div>
+</div>
+{% endblock %}

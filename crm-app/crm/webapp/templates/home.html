@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="col-md-6 offset-md-3">
+
+    {% if user.is_authenticated %}
+
+    <h1>Client list</h1>
+    <br>
+    <p>
+          <a href="{% url 'add_client' %}" class="btn-solid theme-primary">Add New</a>
+          <a href="{% url 'export_csv' %}" class="btn-solid theme-primary">Export as CSV</a>
+    </p>
+  
+
+     <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Product</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        {% if clients %}
+            {% for client in clients %}
+                <td>{{ client.id }}</td>
+                <td><a href="{% url 'client' client.id %}">{{ client.full_name }}</a></td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.city }}</td>
+                <td>{{ client.created_at }}</td>
+                <td>
+                    <a href="{% url 'product' client.id %}" title="View">
+                        <i class="fa-solid fa-warehouse"></i>
+                    </a>
+                </td>
+        </tr>
+            {% endfor %}
+
+        {% endif %}
+
+    </tbody>
+    </table>
+
+    {% else %}
+
+   <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <div class="card-body">
+            <h3 class="text-center mb-4 font-weight-bold">CRM Login</h3>
+            
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="mb-6">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="mb-6">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="d-grid mt-6">
+                    <button type="submit" class="btn btn-primary btn-solid theme-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endif %}
+{% endblock %}
